@@ -17,6 +17,7 @@ import {
   DropdownItem,
   Button,
   CardBody,
+  Col,
 } from "reactstrap";
 import DataTable from "react-data-table-component";
 import { useHistory } from "react-router-dom";
@@ -97,7 +98,9 @@ export default () => {
             </DropdownToggle>
             <DropdownMenu className="dropdown-menu-arrow" right>
               <DropdownItem
-                onClick={() => history.push(`/category/detail/${category.id}`)}
+                onClick={() =>
+                  history.push(`/admin/category/detail/${category.id}`)
+                }
               >
                 Detail
               </DropdownItem>
@@ -125,12 +128,12 @@ export default () => {
         <Row>
           <div className="col">
             <Card className="shadow">
-              <CardHeader className="border-0">
-                <div className="row">
-                  <div className="col-6">
-                    <h3 className="mb-0">Category</h3>
-                  </div>
-                  <div className="text-right col-6">
+              <CardHeader className="bg-white border-0">
+                <Row className="align-items-center">
+                  <Col xs="8">
+                    <h3 className="mb-0">Category Create</h3>
+                  </Col>
+                  <Col className="text-right" xs="4">
                     <Button
                       className="btn-icon btn-2"
                       color="primary"
@@ -143,8 +146,8 @@ export default () => {
                       </span>
                       New
                     </Button>
-                  </div>
-                </div>
+                  </Col>
+                </Row>
               </CardHeader>
               <CardBody>
                 <DataTable

@@ -1,6 +1,6 @@
 import { axiosInstance } from "./config";
 import { errorAlert, successAlert } from "./utility";
-import { SET_CATEGORIES } from "./";
+import { SET_CATEGORIES, SET_CATEGORY } from "./";
 const url = "/categories";
 
 export const getCategories = () => {
@@ -11,6 +11,22 @@ export const getCategories = () => {
         type: SET_CATEGORIES,
         payload: {
           categories: data,
+        },
+      });
+    } catch (error) {
+      errorAlert(error.message);
+    }
+  };
+};
+
+export const getCategory = (categoryId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axiosInstance.get(`${url}/${categoryId}`);
+      dispatch({
+        type: SET_CATEGORY,
+        payload: {
+          category: data,
         },
       });
     } catch (error) {
@@ -39,7 +55,6 @@ export const addCategory = (newCategory) => {
 };
 
 export const updateCategory = (categoryId, newCategory) => {
-  console.log("updateCategory");
   return async (dispatch, getState) => {
     try {
       const { data } = await axiosInstance.put(

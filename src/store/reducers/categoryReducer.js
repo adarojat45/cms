@@ -1,4 +1,4 @@
-import { SET_CATEGORIES } from "../actions";
+import { SET_CATEGORIES, SET_CATEGORY } from "../actions";
 const initialState = {
   categories: [],
   category: null,
@@ -8,31 +8,8 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case SET_CATEGORIES:
       return { ...state, categories: action.payload.categories };
-    case "ADD_FEATURE":
-      return {
-        ...state,
-        features: state.features.concat(action.payload.feature),
-      };
-    case "UPDATE_FEATURE":
-      const findIndex = (element, i) =>
-        element.id === action.payload.feature.id;
-      const index = state.features.findIndex(findIndex);
-      return {
-        ...state,
-        features: [
-          ...state.features.slice(0, index),
-          {
-            ...state.features[index],
-            ...action.payload.feature,
-          },
-          ...state.features.slice(index + 1),
-        ],
-      };
-    case "DELETE_FEATURE":
-      const newFeatures = state.features.filter((feature) => {
-        return feature.id !== action.payload.feature.id;
-      });
-      return { ...state, features: newFeatures };
+    case SET_CATEGORY:
+      return { ...state, category: action.payload.category };
     default:
       return state;
   }

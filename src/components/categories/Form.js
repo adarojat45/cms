@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FormGroup, Form, Input, InputGroup, Button } from "reactstrap";
 import Alert from "../utilities/Alert";
 
-export default ({ category, onSubmit }) => {
+export default ({ category, onSubmit, isClear }) => {
   const [categoryInput, setCategoryInput] = useState({
     name: "",
     description: "",
@@ -29,10 +29,12 @@ export default ({ category, onSubmit }) => {
       return setIsAlert(true);
     }
     onSubmit(categoryInput);
-    setCategoryInput({
-      name: "",
-      description: "",
-    });
+    if (isClear) {
+      setCategoryInput({
+        name: "",
+        description: "",
+      });
+    }
   };
   return (
     <>
