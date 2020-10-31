@@ -72,8 +72,7 @@ export default () => {
               onChange={() =>
                 dispatch(
                   updateCategory(category.id, {
-                    name: category.name,
-                    description: category.description,
+                    ...category,
                     active: !category.active,
                   })
                 )

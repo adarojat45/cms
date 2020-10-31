@@ -12,6 +12,7 @@ import {
   userReducer,
   partnerReducer,
   categoryReducer,
+  postReducer,
 } from "./reducers";
 
 const reducers = combineReducers({
@@ -25,6 +26,7 @@ const reducers = combineReducers({
   userReducer,
   partnerReducer,
   categoryReducer,
+  postReducer,
 });
 
 const store = process.env.REACT_APP_DEV

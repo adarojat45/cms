@@ -8,3 +8,4 @@ export { default as videoReducer } from "./videoReducer";
 export { default as songReducer } from "./songReducer";
 export { default as userReducer } from "./userReducer";
 export { default as categoryReducer } from "./categoryReducer";
+export { default as postReducer } from "./postReducer";
