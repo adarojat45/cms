@@ -68,7 +68,7 @@ export default (props) => {
                   </InputGroupAddon>
                   <Input
                     placeholder="Email"
-                    type="email"
+                    type="text"
                     autoComplete="new-email"
                     value={email}
                     onChange={(e) => {

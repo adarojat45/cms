@@ -1,14 +1,14 @@
 import axios from "axios";
 
-// const getToken = () => {
-//   return localStorage.getItem("token");
-// };
+const getToken = () => {
+  return localStorage.getItem("token");
+};
 
 export const dev = process.env.REACT_APP_DEV;
 export const apiUrl = process.env.REACT_APP_API_URL;
 export const axiosInstance = axios.create({
   baseURL: apiUrl,
-  // headers: { Authorization: "Bearer " + getToken() },
+  headers: { Authorization: "Bearer " + getToken() },
 });
 
 export const cloudinaryOptions = {
