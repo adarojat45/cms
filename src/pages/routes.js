@@ -5,6 +5,7 @@ import {
   CategoryDetail,
   PostList,
   PostCreate,
+  PostDetail,
 } from "./index";
 
 export const routers = [
@@ -43,6 +44,11 @@ export const routers = [
     exact: true,
     layout: "/admin",
     path: "/post/create",
+  },
+  {
+    component: PostDetail,
+    layout: "/admin",
+    path: "/post/detail/:postId",
   },
 ];
 

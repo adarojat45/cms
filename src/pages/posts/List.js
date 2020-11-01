@@ -118,9 +118,7 @@ export default () => {
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-arrow" right>
                 <DropdownItem
-                  onClick={() =>
-                    history.push(`/admin/category/detail/${post.id}`)
-                  }
+                  onClick={() => history.push(`/admin/post/detail/${post.id}`)}
                 >
                   Detail
                 </DropdownItem>

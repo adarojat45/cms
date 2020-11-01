@@ -16,3 +16,4 @@ export { default as CategoryDetail } from "./categories/Detail";
 export { default as CategoryCreate } from "./categories/Create";
 export { default as PostList } from "./posts/List";
 export { default as PostCreate } from "./posts/Create";
+export { default as PostDetail } from "./posts/Detail";
