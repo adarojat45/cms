@@ -50,7 +50,7 @@ export default () => {
                 </Row>
               </CardHeader>
               <CardBody>
-                <Form onSubmit={onSubmit} />
+                <Form onSubmit={onSubmit} isCreate isClear />
               </CardBody>
               <CardFooter className="py-4"></CardFooter>
             </Card>

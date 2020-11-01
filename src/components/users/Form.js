@@ -3,10 +3,10 @@ import { FormGroup, Form, Input, Row, Col, Button } from "reactstrap";
 import { errorAlert } from "../../store/actions/utility";
 import { ModalGallery } from "../images";
 
-export default (props) => {
+export default ({ user, isClear, onSubmit, isCreate }) => {
   const [isError, setIsError] = useState(false);
   const [isGallery, setIsGallery] = useState(false);
-  const [user, setUser] = useState({
+  const [userInput, setUserInput] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -21,47 +21,33 @@ export default (props) => {
   });
 
   useEffect(() => {
-    if (props.user) {
-      setUser({
-        firstName: props.user.firstName,
-        lastName: props.user.lastName,
-        email: props.user.email,
-        username: props.user.username,
-        password: props.user.password,
-        passwordConfirmation: props.user.passwordConfirmation,
-        image: props.user.image,
+    if (user) {
+      setUserInput({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        username: user.username,
+        password: user.password,
+        passwordConfirmation: user.passwordConfirmation,
+        image: user.image,
       });
     }
-  }, [props]);
+  }, [user]);
 
   const onChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setUser({ ...user, [name]: value });
+    setUserInput({ ...userInput, [name]: value });
   };
 
   const onSelectImage = (newImage) => {
     const newUser = { ...user, image: newImage };
-    setUser(newUser);
+    setUserInput(newUser);
     setIsGallery(false);
   };
 
-  const onSubmit = () => {
-    if (
-      user.firstName === "" ||
-      user.lastName === "" ||
-      user.email === "" ||
-      user.username === "" ||
-      user.password !== user.passwordConfirmation
-    ) {
-      setIsError(true);
-      return errorAlert("invalid input");
-    }
-    const newUser = {
-      ...user,
-    };
-    props.onSubmit(newUser);
-    setUser({
+  const handleIsClear = () => {
+    setUserInput({
       firstName: "",
       lastName: "",
       username: "",
@@ -76,11 +62,41 @@ export default (props) => {
     });
   };
 
+  const handleSubmit = () => {
+    if (
+      userInput.firstName === "" ||
+      userInput.lastName === "" ||
+      userInput.email === "" ||
+      userInput.username === ""
+    ) {
+      setIsError(true);
+      return errorAlert("invalid input");
+    }
+
+    if (isCreate) {
+      if (userInput.password !== userInput.passwordConfirmation) {
+        setIsError(true);
+        return errorAlert("invalid input");
+      }
+    } else {
+      delete userInput.password;
+      delete userInput.passwordConfirmation;
+    }
+
+    const newUser = {
+      ...userInput,
+    };
+    onSubmit(newUser);
+    if (isClear) {
+      handleIsClear();
+    }
+  };
+
   return (
     <>
       <Form onSubmit={onSubmit}>
         <Row style={{ justifyContent: "center", alignItems: "center" }}>
-          {user.image.url === "" ? (
+          {userInput.image.url === "" ? (
             <Button
               color="primary"
               type="button"
@@ -94,7 +110,7 @@ export default (props) => {
               onClick={() => setIsGallery(true)}
               className="rounded-circle"
               alt="profileImage"
-              src={user.image.url}
+              src={userInput.image.url}
               style={{ maxWidth: 200, margin: 5, maxHeight: 200 }}
             />
           )}
@@ -107,18 +123,18 @@ export default (props) => {
             </label>
             <FormGroup
               className={
-                isError === true && user.firstName === ""
-                  ? "has-danger"
-                  : isError === true && user.firstName !== ""
-                  ? "has-success"
+                isError === true && userInput.firstName === ""
+                  ? "mb-3 has-danger"
+                  : isError === true && userInput.firstName !== ""
+                  ? "mb-3 has-success"
                   : null
               }
             >
               <Input
                 className={
-                  isError === true && user.firstName === ""
+                  isError === true && userInput.firstName === ""
                     ? "is-invalid"
-                    : isError === true && user.firstName !== ""
+                    : isError === true && userInput.firstName !== ""
                     ? "is-valid"
                     : null
                 }
@@ -126,7 +142,7 @@ export default (props) => {
                 placeholder="First Name"
                 type="text"
                 name="firstName"
-                value={user.firstName}
+                value={userInput.firstName}
                 onChange={onChange}
               />
             </FormGroup>
@@ -137,18 +153,18 @@ export default (props) => {
             </label>
             <FormGroup
               className={
-                isError === true && user.lastName === ""
+                isError === true && userInput.lastName === ""
                   ? "has-danger"
-                  : isError === true && user.lastName !== ""
+                  : isError === true && userInput.lastName !== ""
                   ? "has-success"
                   : null
               }
             >
               <Input
                 className={
-                  isError === true && user.lastName === ""
+                  isError === true && userInput.lastName === ""
                     ? "is-invalid"
-                    : isError === true && user.lastName !== ""
+                    : isError === true && userInput.lastName !== ""
                     ? "is-valid"
                     : null
                 }
@@ -156,7 +172,7 @@ export default (props) => {
                 placeholder="Last Name"
                 type="text"
                 name="lastName"
-                value={user.lastName}
+                value={userInput.lastName}
                 onChange={onChange}
               />
             </FormGroup>
@@ -169,18 +185,18 @@ export default (props) => {
             </label>
             <FormGroup
               className={
-                isError === true && user.username === ""
+                isError === true && userInput.username === ""
                   ? "has-danger"
-                  : isError === true && user.username !== ""
+                  : isError === true && userInput.username !== ""
                   ? "has-success"
                   : null
               }
             >
               <Input
                 className={
-                  isError === true && user.username === ""
+                  isError === true && userInput.username === ""
                     ? "is-invalid"
-                    : isError === true && user.username !== ""
+                    : isError === true && userInput.username !== ""
                     ? "is-valid"
                     : null
                 }
@@ -188,7 +204,7 @@ export default (props) => {
                 placeholder="Username"
                 type="text"
                 name="username"
-                value={user.username}
+                value={userInput.username}
                 onChange={onChange}
               />
             </FormGroup>
@@ -199,18 +215,18 @@ export default (props) => {
             </label>
             <FormGroup
               className={
-                isError === true && user.email === ""
+                isError === true && userInput.email === ""
                   ? "has-danger"
-                  : isError === true && user.email !== ""
+                  : isError === true && userInput.email !== ""
                   ? "has-success"
                   : null
               }
             >
               <Input
                 className={
-                  isError === true && user.email === ""
+                  isError === true && userInput.email === ""
                     ? "is-invalid"
-                    : isError === true && user.email !== ""
+                    : isError === true && userInput.email !== ""
                     ? "is-valid"
                     : null
                 }
@@ -218,102 +234,108 @@ export default (props) => {
                 placeholder="Email"
                 type="email"
                 name="email"
-                value={user.email}
+                value={userInput.email}
                 onChange={onChange}
               />
             </FormGroup>
           </Col>
         </Row>
-        <Row>
-          <Col md="6">
-            <label className="form-control-label" htmlFor="input-address">
-              Password
-            </label>
-            <FormGroup
-              className={
-                (isError === true &&
-                  user.password !== user.passwordConfirmation) ||
-                (isError === true && user.passwordConfirmation === "")
-                  ? "has-danger"
-                  : isError === true &&
-                    user.password !== "" &&
-                    user.password === user.passwordConfirmation
-                  ? "has-success"
-                  : null
-              }
-            >
-              <Input
+
+        {isCreate && (
+          <Row>
+            <Col md="6">
+              <label className="form-control-label" htmlFor="input-address">
+                Password
+              </label>
+              <FormGroup
                 className={
                   (isError === true &&
-                    user.password !== user.passwordConfirmation) ||
-                  (isError === true && user.passwordConfirmation === "")
-                    ? "is-invalid"
+                    userInput.password !== userInput.passwordConfirmation) ||
+                  (isError === true && userInput.passwordConfirmation === "")
+                    ? "has-danger"
                     : isError === true &&
-                      user.passwordConfirmation !== "" &&
-                      user.password === user.passwordConfirmation
-                    ? "is-valid"
+                      userInput.password !== "" &&
+                      userInput.password === userInput.passwordConfirmation
+                    ? "has-success"
                     : null
                 }
-                placeholder="Password"
-                type="password"
-                name="password"
-                value={user.password}
-                onChange={onChange}
-              />
-            </FormGroup>
-          </Col>
-          <Col md="6">
-            <label className="form-control-label" htmlFor="input-address">
-              Password Confirmation
-            </label>
-            <FormGroup
-              className={
-                (isError === true &&
-                  user.password !== user.passwordConfirmation) ||
-                (isError === true && user.passwordConfirmation === "")
-                  ? "has-danger"
-                  : isError === true &&
-                    user.passwordConfirmation !== "" &&
-                    user.password === user.passwordConfirmation
-                  ? "has-success"
-                  : null
-              }
-            >
-              <Input
+              >
+                <Input
+                  className={
+                    (isError === true &&
+                      userInput.password !== userInput.passwordConfirmation) ||
+                    (isError === true && userInput.passwordConfirmation === "")
+                      ? "is-invalid"
+                      : isError === true &&
+                        userInput.passwordConfirmation !== "" &&
+                        userInput.password === userInput.passwordConfirmation
+                      ? "is-valid"
+                      : null
+                  }
+                  placeholder="Password"
+                  type="password"
+                  name="password"
+                  value={userInput.password}
+                  onChange={onChange}
+                />
+              </FormGroup>
+            </Col>
+            <Col md="6">
+              <label className="form-control-label" htmlFor="input-address">
+                Password Confirmation
+              </label>
+              <FormGroup
                 className={
                   (isError === true &&
-                    user.password !== user.passwordConfirmation) ||
-                  (isError === true && user.passwordConfirmation === "")
-                    ? "is-invalid"
+                    userInput.password !== userInput.passwordConfirmation) ||
+                  (isError === true && userInput.passwordConfirmation === "")
+                    ? "has-danger"
                     : isError === true &&
-                      user.passwordConfirmation !== "" &&
-                      user.password === user.passwordConfirmation
-                    ? "is-valid"
+                      userInput.passwordConfirmation !== "" &&
+                      userInput.password === userInput.passwordConfirmation
+                    ? "has-success"
                     : null
                 }
-                placeholder="Password Confirmation"
-                type="password"
-                name="passwordConfirmation"
-                value={user.passwordConfirmation}
-                onChange={onChange}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+              >
+                <Input
+                  className={
+                    (isError === true &&
+                      userInput.password !== userInput.passwordConfirmation) ||
+                    (isError === true && userInput.passwordConfirmation === "")
+                      ? "is-invalid"
+                      : isError === true &&
+                        userInput.passwordConfirmation !== "" &&
+                        userInput.password === userInput.passwordConfirmation
+                      ? "is-valid"
+                      : null
+                  }
+                  placeholder="Password Confirmation"
+                  type="password"
+                  name="passwordConfirmation"
+                  value={userInput.passwordConfirmation}
+                  onChange={onChange}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+        )}
         <Button
           color="primary"
           type="button"
-          onClick={() => onSubmit()}
+          onClick={() => handleSubmit()}
           className="float-right"
         >
-          Save changes
+          <span className="btn-inner--icon">
+            <i className="ni ni-check-bold" />
+          </span>
+          Save
         </Button>
       </Form>
       <ModalGallery
         isOpen={isGallery}
         onSelect={onSelectImage}
         toggle={() => setIsGallery(!isGallery)}
-        selectedImages={[{ ...user.image }]}
+        selectedImages={[{ ...userInput.image }]}
       />
     </>
   );
