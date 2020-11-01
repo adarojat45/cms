@@ -39,7 +39,7 @@ export default () => {
                       color="primary"
                       type="button"
                       size="sm"
-                      onClick={() => history.push("/admin/category")}
+                      onClick={() => history.goBack()}
                     >
                       <span className="btn-inner--icon">
                         <i className="ni ni-bold-left" />

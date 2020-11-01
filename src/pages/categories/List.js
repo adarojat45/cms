@@ -59,60 +59,62 @@ export default () => {
 
   const renderTable = useCallback(() => {
     const newData = categories.map((category, i) => {
-      var data = {};
-      data.no = i + 1;
-      data.name = category.name;
-      data.active = (
-        <div style={{ marginTop: "7px" }}>
-          <label className="custom-toggle">
-            <input
-              defaultChecked={category.active}
-              value={category.active}
-              type="checkbox"
-              onChange={() =>
-                dispatch(
-                  updateCategory(category.id, {
-                    ...category,
-                    active: !category.active,
-                  })
-                )
-              }
-            />
-            <span className="custom-toggle-slider rounded-circle" />
-          </label>
-        </div>
-      );
-      data.action = (
-        <>
-          <UncontrolledDropdown>
-            <DropdownToggle
-              className="btn-icon-only text-light"
-              href="#"
-              role="button"
-              size="sm"
-              color=""
-              onClick={(e) => e.preventDefault()}
-            >
-              <i className="fas fa-ellipsis-v" />
-            </DropdownToggle>
-            <DropdownMenu className="dropdown-menu-arrow" right>
-              <DropdownItem
-                onClick={() =>
-                  history.push(`/admin/category/detail/${category.id}`)
+      return {
+        no: i + 1,
+        name: category.name,
+        active: (
+          <div style={{ marginTop: "7px" }}>
+            <label className="custom-toggle">
+              <input
+                defaultChecked={category.active}
+                value={category.active}
+                type="checkbox"
+                onChange={() =>
+                  dispatch(
+                    updateCategory(category.id, {
+                      ...category,
+                      active: !category.active,
+                    })
+                  )
                 }
-              >
-                Detail
-              </DropdownItem>
-              <DropdownItem
-                onClick={() => dispatch(deleteCategory(category.id))}
-              >
-                Delete
-              </DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        </>
-      );
-      return data;
+              />
+              <span className="custom-toggle-slider rounded-circle" />
+            </label>
+          </div>
+        ),
+        action: (
+          <>
+            {!category.active && (
+              <UncontrolledDropdown>
+                <DropdownToggle
+                  className="btn-icon-only text-light"
+                  href="#"
+                  role="button"
+                  size="sm"
+                  color=""
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <i className="fas fa-ellipsis-v" />
+                </DropdownToggle>
+                <DropdownMenu className="dropdown-menu-arrow" right>
+                  <DropdownItem
+                    onClick={() =>
+                      history.push(`/admin/category/detail/${category.id}`)
+                    }
+                  >
+                    Detail
+                  </DropdownItem>
+                  <DropdownItem
+                    onClick={() => dispatch(deleteCategory(category.id))}
+                  >
+                    Delete
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            )}
+          </>
+        ),
+      };
     });
     setData(newData);
   }, [categories, history, dispatch]);
@@ -130,7 +132,7 @@ export default () => {
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h3 className="mb-0">Category Create</h3>
+                    <h3 className="mb-0">Category List</h3>
                   </Col>
                   <Col className="text-right" xs="4">
                     <Button

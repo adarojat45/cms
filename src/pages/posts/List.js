@@ -105,28 +105,32 @@ export default () => {
         ),
         action: (
           <>
-            <UncontrolledDropdown>
-              <DropdownToggle
-                className="btn-icon-only text-light"
-                href="#"
-                role="button"
-                size="sm"
-                color=""
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fas fa-ellipsis-v" />
-              </DropdownToggle>
-              <DropdownMenu className="dropdown-menu-arrow" right>
-                <DropdownItem
-                  onClick={() => history.push(`/admin/post/detail/${post.id}`)}
+            {!post.active && (
+              <UncontrolledDropdown>
+                <DropdownToggle
+                  className="btn-icon-only text-light"
+                  href="#"
+                  role="button"
+                  size="sm"
+                  color=""
+                  onClick={(e) => e.preventDefault()}
                 >
-                  Detail
-                </DropdownItem>
-                <DropdownItem onClick={() => dispatch(deletePost(post.id))}>
-                  Delete
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+                  <i className="fas fa-ellipsis-v" />
+                </DropdownToggle>
+                <DropdownMenu className="dropdown-menu-arrow" right>
+                  <DropdownItem
+                    onClick={() =>
+                      history.push(`/admin/post/detail/${post.id}`)
+                    }
+                  >
+                    Detail
+                  </DropdownItem>
+                  <DropdownItem onClick={() => dispatch(deletePost(post.id))}>
+                    Delete
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            )}
           </>
         ),
       };
