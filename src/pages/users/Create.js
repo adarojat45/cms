@@ -12,7 +12,7 @@ import {
   CardBody,
   Col,
 } from "reactstrap";
-import { UserForm } from "../../components/users";
+import Form from "../../components/users/Form";
 
 export default () => {
   const dispatch = useDispatch();
@@ -26,14 +26,14 @@ export default () => {
     <div>
       <Container className="mt--7" fluid>
         <Row>
-          <Col>
-            <Card className="shadow">
-              <CardHeader className="border-0">
-                <div className="row">
-                  <div className="col-6">
+          <div className="col">
+            <Card className="bg-secondary shadow">
+              <CardHeader className="bg-white border-0">
+                <Row className="align-items-center">
+                  <Col xs="8">
                     <h3 className="mb-0">User Create</h3>
-                  </div>
-                  <div className="text-right col-6">
+                  </Col>
+                  <Col className="text-right" xs="4">
                     <Button
                       className="btn-icon btn-2"
                       color="primary"
@@ -42,19 +42,19 @@ export default () => {
                       onClick={() => history.goBack()}
                     >
                       <span className="btn-inner--icon">
-                        <i className="fas fa-arrow-left" />
+                        <i className="ni ni-bold-left" />
                       </span>
                       Back
                     </Button>
-                  </div>
-                </div>
+                  </Col>
+                </Row>
               </CardHeader>
               <CardBody>
-                <UserForm onSubmit={onSubmit} />
+                <Form onSubmit={onSubmit} />
               </CardBody>
               <CardFooter className="py-4"></CardFooter>
             </Card>
-          </Col>
+          </div>
         </Row>
       </Container>
     </div>

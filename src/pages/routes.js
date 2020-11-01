@@ -6,6 +6,9 @@ import {
   PostList,
   PostCreate,
   PostDetail,
+  UserList,
+  UserCreate,
+  UserDetail,
 } from "./index";
 
 export const routers = [
@@ -49,6 +52,22 @@ export const routers = [
     component: PostDetail,
     layout: "/admin",
     path: "/post/detail/:postId",
+  },
+  {
+    component: UserList,
+    exact: true,
+    layout: "/admin",
+    path: "/user",
+  },
+  {
+    component: UserCreate,
+    layout: "/admin",
+    path: "/user/create",
+  },
+  {
+    component: UserDetail,
+    layout: "/admin",
+    path: "/user/detail/:userId",
   },
 ];
 

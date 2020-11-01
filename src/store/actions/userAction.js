@@ -1,35 +1,34 @@
 import { axiosInstance } from "./config";
 import { errorAlert, successAlert } from "./utility";
+import { SET_USERS, SET_USER, SET_PROFILE } from "./";
 const url = "/users";
 
 export const getUsers = () => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     try {
-      const res = await axiosInstance.get(url);
+      const { data } = await axiosInstance.get(url);
       dispatch({
-        type: "SET_USERS",
+        type: SET_USERS,
         payload: {
-          users: res.data,
+          users: data,
         },
       });
-      // successAlert("Fetch feature data successfully");
     } catch (error) {
       errorAlert(error.message);
     }
   };
 };
 
-export const getUser = (id) => {
+export const getUser = (userId) => {
   return async (dispatch, getState) => {
     try {
-      const res = await axiosInstance.get(`${url}/${id}`);
+      const { data } = await axiosInstance.get(`${url}/${userId}`);
       dispatch({
-        type: "SET_USER",
+        type: SET_USER,
         payload: {
-          user: res.data,
+          user: data,
         },
       });
-      // successAlert("Fetch feature data successfully");
     } catch (error) {
       errorAlert(error.message);
     }
@@ -39,11 +38,13 @@ export const getUser = (id) => {
 export const addUser = (newUser) => {
   return async (dispatch, getState) => {
     try {
-      const res = await axiosInstance.post(url, newUser);
+      const { data } = await axiosInstance.post(url, newUser);
+      const { users } = getState().userReducer;
+      const newUsers = users.concat(data);
       dispatch({
-        type: "ADD_USER",
+        type: SET_USERS,
         payload: {
-          user: res.data,
+          users: newUsers,
         },
       });
       successAlert("Add user data successfully");
@@ -53,14 +54,25 @@ export const addUser = (newUser) => {
   };
 };
 
-export const updateUser = (id, newUser) => {
+export const updateUser = (userId, newUser) => {
   return async (dispatch, getState) => {
     try {
-      const res = await axiosInstance.put(url + `/${id}`, newUser);
+      const { data } = await axiosInstance.put(url + `/${userId}`, newUser);
+      const { users } = getState().userReducer;
+      const findIndex = (element) => element.id === userId;
+      const index = users.findIndex(findIndex);
+      const newUsers = [
+        ...users.slice(0, index),
+        {
+          ...users[index],
+          ...data,
+        },
+        ...users.slice(index + 1),
+      ];
       dispatch({
-        type: "UPDATE_USER",
+        type: SET_USERS,
         payload: {
-          user: res.data,
+          users: newUsers,
         },
       });
       successAlert("Update user data successfully");
@@ -70,19 +82,19 @@ export const updateUser = (id, newUser) => {
   };
 };
 
-export const deleteUser = (id) => {
+export const deleteUser = (userId) => {
   return async (dispatch, getState) => {
     try {
-      axiosInstance.delete(url + `/${id}`);
+      axiosInstance.delete(url + `/${userId}`);
+      const { users } = getState().userReducer;
+      const newUsers = users.filter((item) => item.id !== userId);
       dispatch({
-        type: "DELETE_USER",
+        type: SET_USERS,
         payload: {
-          user: {
-            id,
-          },
+          users: newUsers,
         },
       });
-      successAlert("Delete user data successfully");
+      successAlert("Delete data successfully");
     } catch (error) {
       errorAlert(error.message);
     }
@@ -92,24 +104,23 @@ export const deleteUser = (id) => {
 export const getProfile = () => {
   return async (dispatch, getState) => {
     try {
-      const res = await axiosInstance.get(url + "/findProfile");
+      const { data } = await axiosInstance.get(url + "/findProfile");
       dispatch({
-        type: "SET_PROFILE",
+        type: SET_PROFILE,
         payload: {
-          user: res.data,
+          user: data,
         },
       });
-      // successAlert("Fetch feature data successfully");
     } catch (error) {
       errorAlert(error.message);
     }
   };
 };
 
-export const changePassword = (id, newUser) => {
+export const changePassword = (userId, newUser) => {
   return async (dispatch, getState) => {
     try {
-      await axiosInstance.put(`${url}/changePassword/${id}`, newUser);
+      await axiosInstance.put(`${url}/changePassword/${userId}`, newUser);
       // dispatch({
       //   type: "UPDATE_USER",
       //   payload: {

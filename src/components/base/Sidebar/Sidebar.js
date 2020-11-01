@@ -39,6 +39,10 @@ const menus = [
     name: "Post",
     to: "/admin/post",
   },
+  {
+    name: "User",
+    to: "/admin/user",
+  },
 ];
 
 class Sidebar extends React.Component {
