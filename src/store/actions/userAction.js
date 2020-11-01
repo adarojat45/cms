@@ -113,7 +113,7 @@ export const getProfile = () => {
       });
     } catch (error) {
       errorAlert(error.message);
-      localStorage.removeItem("token");
+      // localStorage.removeItem("token");
     }
   };
 };
