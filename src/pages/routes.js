@@ -1,21 +1,71 @@
+import {
+  Dashboard,
+  CategoryList,
+  CategoryCreate,
+  CategoryDetail,
+  PostList,
+  PostCreate,
+} from "./index";
 
-import PostListPage from "./posts/List";
-import DashboardPage from "./Dashboard";
-
-var routes = [
+export const routers = [
   {
+    component: Dashboard,
+    exact: true,
+    layout: "/admin",
+    path: "/dashboard",
+  },
+  {
+    component: CategoryList,
+    exact: true,
+    layout: "/admin",
+    path: "/category",
+  },
+  {
+    component: CategoryCreate,
+    exact: true,
+    layout: "/admin",
+    path: "/category/create",
+  },
+  {
+    component: CategoryDetail,
+    exact: true,
+    layout: "/admin",
+    path: "/category/detail/:categoryId",
+  },
+  {
+    component: PostList,
+    exact: true,
+    layout: "/admin",
+    path: "/post",
+  },
+  {
+    component: PostCreate,
+    exact: true,
+    layout: "/admin",
+    path: "/post/create",
+  },
+];
+
+export const sidebarMenu = [
+  {
+    component: Dashboard,
+    layout: "/admin",
     path: "/dashboard",
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
-    component: DashboardPage,
-    layout: "/admin"
   },
   {
-    path: "/post/index",
+    component: CategoryList,
+    layout: "/admin",
+    path: "/category",
+    name: "Dashboard",
+    icon: "ni ni-tv-2 text-primary",
+  },
+  {
+    component: PostList,
+    layout: "/admin",
+    path: "/post",
     name: "Post",
-    icon: "ni ni-books text-info",
-    component: PostListPage,
-    layout: "/admin"
-  }
+    icon: "ni ni-tv-2 text-primary",
+  },
 ];
-export default routes;

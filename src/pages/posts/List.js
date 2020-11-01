@@ -69,7 +69,10 @@ export default () => {
         name: post.name,
         categories: post.categories.map((category) => {
           return (
-            <Link to={`/admin/category/detail/${category.id}`}>
+            <Link
+              to={`/admin/category/detail/${category.id}`}
+              key={category.id}
+            >
               <Badge
                 key={category.id}
                 color="primary"
@@ -154,7 +157,7 @@ export default () => {
                       color="primary"
                       type="button"
                       size="sm"
-                      onClick={() => history.push("/admin/category/create")}
+                      onClick={() => history.push("/admin/post/create")}
                     >
                       <span className="btn-inner--icon">
                         <i className="ni ni-fat-add" />

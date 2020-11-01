@@ -4,11 +4,13 @@
   "private": true,
   "dependencies": {
     "@app-masters/react-cloudinary-uploader": "^0.1.41",
+    "@babel/runtime": "7.9.2",
     "@fortawesome/fontawesome-free": "^5.13.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@tinymce/tinymce-react": "^3.6.0",
+    "@uiw/react-md-editor": "^1.14.5",
     "axios": "^0.19.2",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",

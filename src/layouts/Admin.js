@@ -7,44 +7,8 @@ import AdminNavbar from "../components/base/Navbars/AdminNavbar.js";
 import AdminFooter from "../components/base/Footers/AdminFooter.js";
 import Sidebar from "../components/base/Sidebar/Sidebar.js";
 import Header from "../components/base/Headers/Header";
-
-import {
-  Dashboard,
-  PostList,
-  CategoryList,
-  CategoryCreate,
-  CategoryDetail,
-} from "../pages";
-import routes from "../pages/routes";
 import { getProfile } from "../store/actions/userAction.js";
-
-const routers = [
-  {
-    component: Dashboard,
-    exact: true,
-    path: "/admin/dashboard",
-  },
-  {
-    component: CategoryList,
-    exact: true,
-    path: "/admin/category",
-  },
-  {
-    component: CategoryCreate,
-    exact: true,
-    path: "/admin/category/create",
-  },
-  {
-    component: CategoryDetail,
-    exact: true,
-    path: "/admin/category/detail/:categoryId",
-  },
-  {
-    component: PostList,
-    exact: true,
-    path: "/admin/post",
-  },
-];
+import { routers, sidebarMenu } from "../pages/routes";
 
 class Admin extends React.Component {
   componentDidUpdate(e) {
@@ -54,13 +18,13 @@ class Admin extends React.Component {
   }
 
   getBrandText = (path) => {
-    for (let i = 0; i < routes.length; i++) {
+    for (let i = 0; i < sidebarMenu.length; i++) {
       if (
         this.props.location.pathname.indexOf(
-          routes[i].layout + routes[i].path
+          sidebarMenu[i].layout + sidebarMenu[i].path
         ) !== -1
       ) {
-        return routes[i].name;
+        return sidebarMenu[i].name;
       }
     }
     return "Brand";
@@ -70,7 +34,7 @@ class Admin extends React.Component {
       <div>
         <Sidebar
           {...this.props}
-          routes={routes}
+          routes={sidebarMenu}
           logo={{
             innerLink: "/admin/dashboard",
             imgSrc: require("../assets/img/brand/argon-react.png"),
@@ -85,7 +49,13 @@ class Admin extends React.Component {
           <Header />
           <Switch>
             {routers.map((router, i) => {
-              return <Route key={i} {...router} />;
+              return (
+                <Route
+                  key={i}
+                  {...router}
+                  path={`${router.layout}${router.path}`}
+                />
+              );
             })}
             <Redirect from="*" to="/admin/dashboard" />
           </Switch>
