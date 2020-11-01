@@ -1,11 +1,4 @@
-export { default as templateReducer } from "./templateReducer";
-export { default as partnerReducer } from "./partnerReducer";
-export { default as featureReducer } from "./featureReducer";
-export { default as packageReducer } from "./packageReducer";
-export { default as orderReducer } from "./orderReducer";
 export { default as imageReducer } from "./imageReducer";
-export { default as videoReducer } from "./videoReducer";
-export { default as songReducer } from "./songReducer";
 export { default as userReducer } from "./userReducer";
 export { default as categoryReducer } from "./categoryReducer";
 export { default as postReducer } from "./postReducer";

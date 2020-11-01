@@ -2,29 +2,15 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import {
-  featureReducer,
-  orderReducer,
-  packageReducer,
-  templateReducer,
   imageReducer,
-  songReducer,
-  videoReducer,
   userReducer,
-  partnerReducer,
   categoryReducer,
   postReducer,
 } from "./reducers";
 
 const reducers = combineReducers({
-  featureReducer,
-  orderReducer,
-  packageReducer,
-  templateReducer,
   imageReducer,
-  songReducer,
-  videoReducer,
   userReducer,
-  partnerReducer,
   categoryReducer,
   postReducer,
 });

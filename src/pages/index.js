@@ -1,16 +1,8 @@
 export { default as Dashboard } from "./Dashboard";
-export { default as FeatureList } from "./features/List";
-export { default as OrderList } from "./orders/List";
-export { default as OrderDetail } from "./orders/Detail";
-export { default as PackageList } from "./packages/List";
-export { default as TemplateList } from "./templates/List";
 export { default as Login } from "./auth/Login";
 export { default as UserList } from "./users/List";
 export { default as UserDetail } from "./users/Detail";
 export { default as UserCreate } from "./users/Create";
-export { default as PartnerList } from "./partners/List";
-export { default as PartnerDetail } from "./partners/Detail";
-export { default as PartnerCreate } from "./partners/Create";
 export { default as CategoryList } from "./categories/List";
 export { default as CategoryDetail } from "./categories/Detail";
 export { default as CategoryCreate } from "./categories/Create";
