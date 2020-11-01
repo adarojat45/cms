@@ -121,12 +121,6 @@ export const changePassword = (userId, newUser) => {
   return async (dispatch, getState) => {
     try {
       await axiosInstance.put(`${url}/changePassword/${userId}`, newUser);
-      // dispatch({
-      //   type: "UPDATE_USER",
-      //   payload: {
-      //     user: res.data,
-      //   },
-      // });
       successAlert("Change password successfully");
     } catch (error) {
       errorAlert(error.message);

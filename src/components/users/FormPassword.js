@@ -1,13 +1,7 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { FormGroup, Form, Input, Row, Col, Button } from "reactstrap";
-import { errorAlert } from "../../store/actions/utility";
-import { changePassword } from "../../store/actions/userAction";
 
-export default (props) => {
-  const dispatch = useDispatch();
-  const { userId } = useParams();
+export default ({ onSubmit }) => {
   const [isError, setIsError] = useState(false);
   const [user, setUser] = useState({
     password: "",
@@ -18,30 +12,29 @@ export default (props) => {
     const name = e.target.name;
     const value = e.target.value;
     setUser({ ...user, [name]: value });
+    setIsError(false);
   };
 
-  const onSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (
       user.passwordConfirmation === "" ||
       user.password === "" ||
       user.password !== user.passwordConfirmation
     ) {
       setIsError(true);
-      return errorAlert("invalid input");
+    } else {
+      onSubmit({ ...user });
+      setUser({
+        password: "",
+        passwordConfirmation: "",
+      });
     }
-    const newUser = {
-      ...user,
-    };
-    dispatch(changePassword(userId, newUser));
-    setUser({
-      password: "",
-      passwordConfirmation: "",
-    });
   };
 
   return (
     <>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Row>
           <Col md="6">
             <label className="form-control-label" htmlFor="input-address">
@@ -118,12 +111,7 @@ export default (props) => {
             </FormGroup>
           </Col>
         </Row>
-        <Button
-          color="primary"
-          type="button"
-          onClick={() => onSubmit()}
-          className="float-right"
-        >
+        <Button color="primary" type="submit" className="float-right">
           Save changes
         </Button>
       </Form>

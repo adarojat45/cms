@@ -19,7 +19,12 @@ import classnames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 
 import Form from "../../components/users/Form";
-import { getUser, updateUser } from "../../store/actions/userAction";
+import FormPassword from "../../components/users/FormPassword";
+import {
+  changePassword,
+  getUser,
+  updateUser,
+} from "../../store/actions/userAction";
 
 export default () => {
   const [tabTitles] = useState(["Edit", "Password"]);
@@ -52,6 +57,10 @@ export default () => {
 
   const handleSubmit = (newUser) => {
     dispatch(updateUser(userId, newUser));
+  };
+
+  const handleChangePassword = (newPassword) => {
+    dispatch(changePassword(userId, newPassword));
   };
 
   return (
@@ -87,6 +96,9 @@ export default () => {
                 <TabContent activeTab={tab}>
                   <TabPane tabId={1}>
                     <Form user={user} onSubmit={handleSubmit} isClear={false} />
+                  </TabPane>
+                  <TabPane tabId={2}>
+                    <FormPassword onSubmit={handleChangePassword} />
                   </TabPane>
                 </TabContent>
               </CardBody>
