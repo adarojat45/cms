@@ -36,6 +36,11 @@ const columns = [
     sortable: true,
   },
   {
+    name: "Views",
+    selector: "views",
+    sortable: true,
+  },
+  {
     name: "Categories",
     selector: "categories",
   },
@@ -67,6 +72,7 @@ export default () => {
       return {
         no: i + 1,
         name: post.name,
+        views: post.views,
         categories: post.categories.map((category) => {
           return (
             <Link
@@ -178,6 +184,7 @@ export default () => {
                   striped={true}
                   dense={true}
                   pagination
+                  paginationRowsPerPageOptions={[10, 15, 20, 25, 30, 50, 100]}
                 />
               </CardBody>
               <CardFooter className="py-4"></CardFooter>
