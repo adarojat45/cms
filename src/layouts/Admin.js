@@ -37,7 +37,8 @@ class Admin extends React.Component {
           routes={sidebarMenu}
           logo={{
             innerLink: "/admin/dashboard",
-            imgSrc: require("../assets/img/brand/argon-react.png"),
+            imgSrc:
+              "https://res.cloudinary.com/ajatdarojat45/image/upload/v1593945967/diginvite/oqmyjubup8s26ld40nrj.png",
             imgAlt: "...",
           }}
         />
