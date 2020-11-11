@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
   DropdownMenu,
@@ -20,10 +20,10 @@ import {
 
 export default (props) => {
   const { profile } = useSelector((state) => state.userReducer);
-  const history = useHistory();
+
   const onLogout = async () => {
     await localStorage.removeItem("token");
-    history.push("/");
+    window.location.replace("/");
   };
 
   const onSubmit = (e) => {
