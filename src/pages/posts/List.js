@@ -22,6 +22,7 @@ import {
 } from "reactstrap";
 import DataTable from "react-data-table-component";
 import { Link, useHistory } from "react-router-dom";
+import Preview from "../../components/posts/Preview";
 
 const columns = [
   {
@@ -61,11 +62,19 @@ export default () => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.postReducer);
   const [data, setData] = useState([]);
+  const [post, setPost] = useState(null);
+  const [isPreview, setIsPreview] = useState(false);
+
   const history = useHistory();
 
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
+
+  const handlePreview = (newPost) => {
+    setPost(newPost);
+    setIsPreview(true);
+  };
 
   const renderTable = useCallback(() => {
     const newData = posts.map((post, i) => {
@@ -111,32 +120,37 @@ export default () => {
         ),
         action: (
           <>
-            {!post.active && (
-              <UncontrolledDropdown>
-                <DropdownToggle
-                  className="btn-icon-only text-light"
-                  href="#"
-                  role="button"
-                  size="sm"
-                  color=""
-                  onClick={(e) => e.preventDefault()}
-                >
-                  <i className="fas fa-ellipsis-v" />
-                </DropdownToggle>
-                <DropdownMenu className="dropdown-menu-arrow" right>
-                  <DropdownItem
-                    onClick={() =>
-                      history.push(`/admin/post/detail/${post.id}`)
-                    }
-                  >
-                    Detail
-                  </DropdownItem>
-                  <DropdownItem onClick={() => dispatch(deletePost(post.id))}>
-                    Delete
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            )}
+            <UncontrolledDropdown>
+              <DropdownToggle
+                className="btn-icon-only text-light"
+                href="#"
+                role="button"
+                size="sm"
+                color=""
+                onClick={(e) => e.preventDefault()}
+              >
+                <i className="fas fa-ellipsis-v" />
+              </DropdownToggle>
+              <DropdownMenu className="dropdown-menu-arrow" right>
+                <DropdownItem onClick={() => handlePreview(post)}>
+                  Preview
+                </DropdownItem>
+                {!post.active && (
+                  <>
+                    <DropdownItem
+                      onClick={() =>
+                        history.push(`/admin/post/detail/${post.id}`)
+                      }
+                    >
+                      Detail
+                    </DropdownItem>
+                    <DropdownItem onClick={() => dispatch(deletePost(post.id))}>
+                      Delete
+                    </DropdownItem>
+                  </>
+                )}
+              </DropdownMenu>
+            </UncontrolledDropdown>
           </>
         ),
       };
@@ -192,6 +206,11 @@ export default () => {
           </div>
         </Row>
       </Container>
+      <Preview
+        isOpen={isPreview}
+        handleToggle={() => setIsPreview(!isPreview)}
+        post={post}
+      />
     </div>
   );
 };
