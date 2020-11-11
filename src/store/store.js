@@ -6,6 +6,7 @@ import {
   userReducer,
   categoryReducer,
   postReducer,
+  authReducer,
 } from "./reducers";
 
 const reducers = combineReducers({
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   userReducer,
   categoryReducer,
   postReducer,
+  authReducer,
 });
 
 const store = process.env.REACT_APP_DEV

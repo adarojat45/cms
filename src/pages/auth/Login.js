@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/actions/authAction";
-import { errorAlert } from "../../store/actions/utility";
 
 import {
   Button,
@@ -18,6 +17,7 @@ import {
 
 export default (props) => {
   const dispatch = useDispatch();
+  const isAuth = useSelector((state) => state.authReducer.isAuth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isEmailError, setIsEmailError] = useState(false);
@@ -26,9 +26,9 @@ export default (props) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      props.history.push("/admin/dashboard");
+      window.location.replace("/admin/dashboard");
     }
-  });
+  }, [isAuth]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -38,14 +38,7 @@ export default (props) => {
       if (password === "") {
         setIsPasswordError(true);
       } else {
-        try {
-          await dispatch(login({ email, password }));
-          props.history.push("/admin/dashboard");
-        } catch (error) {
-          errorAlert("Email atau password salah");
-          setIsPasswordError(true);
-          setIsEmailError(true);
-        }
+        dispatch(login({ email, password }));
       }
     }
   };
