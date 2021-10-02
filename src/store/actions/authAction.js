@@ -12,7 +12,7 @@ export const login = (credential) => {
 				type: SET_IS_AUTH,
 			});
 		} catch (error) {
-			errorAlert(error.response.data.message);
+			errorAlert(error?.response?.data?.message);
 		}
 	};
 };
