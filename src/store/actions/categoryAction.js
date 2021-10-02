@@ -7,7 +7,6 @@ export const getCategories = () => {
 	return async (dispatch) => {
 		try {
 			const { data } = await axiosInstance.get(url);
-			console.log("🚀 ~ file: categoryAction.js ~ line 10 ~ return ~ data", data);
 			dispatch({
 				type: SET_CATEGORIES,
 				payload: {
