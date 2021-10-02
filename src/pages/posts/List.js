@@ -125,7 +125,7 @@ export default () => {
 							</DropdownToggle>
 							<DropdownMenu className="dropdown-menu-arrow" right>
 								<DropdownItem onClick={() => handlePreview(post)}>Preview</DropdownItem>
-								{!post.active && (
+								{!post.isActive && (
 									<>
 										<DropdownItem
 											onClick={() => history.push(`/admin/post/detail/${post.id}`)}

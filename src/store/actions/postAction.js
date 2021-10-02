@@ -102,9 +102,29 @@ export const deletePost = (postId) => {
 };
 
 export const updateStatus = (postId, payload) => {
-	return async () => {
+	return async (dispatch, getState) => {
 		try {
-			await axiosInstance.patch(url + `/${postId}/updateStatus`, payload);
+			const { data } = await axiosInstance.patch(
+				url + `/${postId}/updateStatus`,
+				payload
+			);
+			const { posts } = getState().postReducer;
+			const findIndex = (element, i) => element.id === postId;
+			const index = posts.findIndex(findIndex);
+			const newPosts = [
+				...posts.slice(0, index),
+				{
+					...posts[index],
+					...data,
+				},
+				...posts.slice(index + 1),
+			];
+			dispatch({
+				type: SET_POSTS,
+				payload: {
+					posts: newPosts,
+				},
+			});
 			successAlert("Update status successfully");
 		} catch (error) {
 			errorAlert(error.message);
