@@ -1,6 +1,6 @@
 import { axiosInstance } from "./config";
 import { errorAlert, successAlert } from "./utility";
-import { SET_USERS, SET_USER, SET_PROFILE } from "./";
+import { SET_USERS, SET_USER } from "./";
 const url = "/users";
 
 export const getUsers = () => {

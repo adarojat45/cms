@@ -107,10 +107,7 @@ export const deleteCategory = (categoryId) => {
 export const updateStatus = (categoryId, payload) => {
 	return async () => {
 		try {
-			const { data } = await axiosInstance.patch(
-				url + `/${categoryId}/updateStatus`,
-				payload
-			);
+			await axiosInstance.patch(url + `/${categoryId}/updateStatus`, payload);
 			successAlert("Update status successfully");
 		} catch (error) {
 			errorAlert(error.message);

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	getCategories,
 	deleteCategory,
-	updateCategory,
 	updateStatus,
 } from "../../store/actions/categoryAction";
 import {
