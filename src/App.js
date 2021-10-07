@@ -12,8 +12,10 @@ function App() {
 		if (localStorage.getItem("token")) {
 			setIsLoggedIn(true);
 			setIsSidebar(true);
+		} else {
+			history.push("/login");
 		}
-	}, []);
+	}, [history]);
 
 	const handleLogin = () => {
 		setIsLoggedIn(true);
