@@ -1,12 +1,19 @@
 import { Sidebar, Header } from "./components";
 import { PostList, Login } from "./pages";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 
 function App() {
 	const [isSidebar, setIsSidebar] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const history = useHistory();
+
+	useEffect(() => {
+		if (localStorage.getItem("token")) {
+			setIsLoggedIn(true);
+			setIsSidebar(true);
+		}
+	}, []);
 
 	const handleLogin = () => {
 		setIsLoggedIn(true);
@@ -15,7 +22,7 @@ function App() {
 	const handleLogout = () => {
 		setIsLoggedIn(false);
 		setIsSidebar(false);
-		localStorage.removeItem("access_token");
+		localStorage.removeItem("token");
 		history.push("/login");
 	};
 
