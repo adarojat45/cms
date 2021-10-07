@@ -1,9 +1,18 @@
-const Header = ({ onClick }) => {
+import { useHistory } from "react-router-dom";
+
+const Header = ({ onMenuClick, onLogoutClick }) => {
+	const history = useHistory();
+
+	const handleLogout = () => {
+		onLogoutClick && onLogoutClick();
+		history.push("/login");
+	};
+
 	return (
 		<header className="mb-3">
 			<nav className="navbar navbar-expand navbar-light ">
 				<div className="container-fluid">
-					<a href="#disabled" className="burger-btn d-block" onClick={onClick}>
+					<a href="#disabled" className="burger-btn d-block" onClick={onMenuClick}>
 						<i className="bi bi-justify fs-3"></i>
 					</a>
 
@@ -71,7 +80,7 @@ const Header = ({ onClick }) => {
 							<a data-bs-toggle="dropdown" aria-expanded="false" href="#disabled">
 								<div className="user-menu d-flex">
 									<div className="user-name text-end me-3">
-										<h6 className="mb-0 text-gray-600">John Doe</h6>
+										<h6 className="mb-0 text-gray-600">Ajat Darojat</h6>
 										<p className="mb-0 text-sm text-gray-600">Administrator</p>
 									</div>
 									<div className="user-img d-flex align-items-center">
@@ -94,20 +103,10 @@ const Header = ({ onClick }) => {
 									</a>
 								</li>
 								<li>
-									<button className="dropdown-item">
-										<i className="icon-mid bi bi-gear me-2"></i> Settings
-									</button>
-								</li>
-								<li>
-									<a className="dropdown-item" href="#disabled">
-										<i className="icon-mid bi bi-wallet me-2"></i> Wallet
-									</a>
-								</li>
-								<li>
 									<hr className="dropdown-divider" />
 								</li>
 								<li>
-									<a className="dropdown-item" href="#disabled">
+									<a className="dropdown-item" href="#disabled" onClick={handleLogout}>
 										<i className="icon-mid bi bi-box-arrow-left me-2"></i> Logout
 									</a>
 								</li>

@@ -11,12 +11,23 @@ function App() {
 		setIsLoggedIn(true);
 	};
 
+	const handleLogout = () => {
+		setIsLoggedIn(false);
+		setIsSidebar(false);
+		localStorage.removeItem("access_token");
+	};
+
 	return (
 		<div className="App">
 			<Sidebar isActive={isSidebar} onClick={() => setIsSidebar(!isSidebar)} />
 			<div id="main">
-				{isLoggedIn && <Header onClick={() => setIsSidebar(!isSidebar)} />}
 				<Router>
+					{isLoggedIn && (
+						<Header
+							onMenuClick={() => setIsSidebar(!isSidebar)}
+							onLogoutClick={handleLogout}
+						/>
+					)}
 					<Switch>
 						<Route path="/login">
 							<Login onLogin={handleLogin} />
