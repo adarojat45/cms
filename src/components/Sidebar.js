@@ -1,38 +1,38 @@
 const Sidebar = ({ isActive, onClick }) => {
 	return (
-		<div id="sidebar" class={isActive ? "active" : "inactive"}>
-			<div class="sidebar-wrapper active">
-				<div class="sidebar-header">
-					<div class="d-flex justify-content-between">
-						<div class="logo">
+		<div id="sidebar" className={isActive ? "active" : "inactive"}>
+			<div className="sidebar-wrapper active">
+				<div className="sidebar-header">
+					<div className="d-flex justify-content-between">
+						<div className="logo">
 							<a href="#disabled">
 								<h2>CMS</h2>
 							</a>
 						</div>
-						<div class="toggler">
+						<div className="toggler">
 							<a
 								href="#disabled"
-								class="sidebar-hide d-xl-none d-block"
+								className="sidebar-hide d-xl-none d-block"
 								onClick={onClick}
 							>
-								<i class="bi bi-x bi-middle"></i>
+								<i className="bi bi-x bi-middle"></i>
 							</a>
 						</div>
 					</div>
 				</div>
-				<div class="sidebar-menu">
-					<ul class="menu">
-						<li class="sidebar-title">Menu</li>
+				<div className="sidebar-menu">
+					<ul className="menu">
+						<li className="sidebar-title">Menu</li>
 
-						<li class="sidebar-item active ">
-							<a href="table.html" class="sidebar-link">
-								<i class="bi bi-grid-fill"></i>
+						<li className="sidebar-item active ">
+							<a href="table.html" className="sidebar-link">
+								<i className="bi bi-grid-fill"></i>
 								<span>Entity 1</span>
 							</a>
 						</li>
 					</ul>
 				</div>
-				<button class="sidebar-toggler btn x">
+				<button className="sidebar-toggler btn x">
 					<i data-feather="x"></i>
 				</button>
 			</div>

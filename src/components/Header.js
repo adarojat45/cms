@@ -1,11 +1,6 @@
-import { useHistory } from "react-router-dom";
-
 const Header = ({ onMenuClick, onLogoutClick }) => {
-	const history = useHistory();
-
 	const handleLogout = () => {
 		onLogoutClick && onLogoutClick();
-		history.push("/login");
 	};
 
 	return (
