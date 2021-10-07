@@ -1,30 +1,52 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Provider } from "react-redux";
-
-import "./assets/css/argon-dashboard-react.min.css";
-import "./assets/plugins/nucleo/css/nucleo.css";
-import "./assets/css/style.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "toastr/build/toastr.min.css";
-import "toastr/build/toastr.min.js";
-
-import AdminLayout from "./layouts/Admin";
-import AuthLayout from "./layouts/Auth";
-
-import store from "./store/store";
+import { Sidebar, Header } from "./components";
+import { PostList, Login } from "./pages";
+import { useEffect, useState } from "react";
+import { Switch, Route, useHistory } from "react-router-dom";
 
 function App() {
-  return (
-    <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route path="/admin" component={AdminLayout} />
-          <Route path="/" component={AuthLayout} />
-        </Switch>
-      </Router>
-    </Provider>
-  );
+	const [isSidebar, setIsSidebar] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const history = useHistory();
+
+	useEffect(() => {
+		if (localStorage.getItem("token")) {
+			setIsLoggedIn(true);
+			setIsSidebar(true);
+		}
+	}, []);
+
+	const handleLogin = () => {
+		setIsLoggedIn(true);
+	};
+
+	const handleLogout = () => {
+		setIsLoggedIn(false);
+		setIsSidebar(false);
+		localStorage.removeItem("token");
+		history.push("/login");
+	};
+
+	return (
+		<div className="App">
+			<Sidebar isActive={isSidebar} onClick={() => setIsSidebar(!isSidebar)} />
+			<div id="main">
+				{isLoggedIn && (
+					<Header
+						onMenuClick={() => setIsSidebar(!isSidebar)}
+						onLogoutClick={handleLogout}
+					/>
+				)}
+				<Switch>
+					<Route path="/login">
+						<Login onLogin={handleLogin} />
+					</Route>
+					<Route path="/">
+						<PostList />
+					</Route>
+				</Switch>
+			</div>
+		</div>
+	);
 }
 
 export default App;
