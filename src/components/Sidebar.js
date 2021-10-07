@@ -1,4 +1,4 @@
-const Sidebar = ({ isActive }) => {
+const Sidebar = ({ isActive, onClick }) => {
 	return (
 		<div id="sidebar" class={isActive ? "active" : "inactive"}>
 			<div class="sidebar-wrapper active">
@@ -10,7 +10,11 @@ const Sidebar = ({ isActive }) => {
 							</a>
 						</div>
 						<div class="toggler">
-							<a href="#disabled" class="sidebar-hide d-xl-none d-block">
+							<a
+								href="#disabled"
+								class="sidebar-hide d-xl-none d-block"
+								onClick={onClick}
+							>
 								<i class="bi bi-x bi-middle"></i>
 							</a>
 						</div>
