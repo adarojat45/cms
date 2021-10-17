@@ -158,7 +158,7 @@ const PostForm = ({ onSubmit, onCancel, post, categories }) => {
 					Cancel
 				</button>
 				<button type="submit" className="btn btn-primary">
-					Create
+					Save
 				</button>
 			</div>
 		</form>

@@ -67,6 +67,10 @@ const PostList = () => {
 	const handleCreate = () => {
 		history.push("/post/create");
 	};
+
+	const handleEdit = (id) => {
+		history.push("/post/" + id);
+	};
 	return (
 		<>
 			<div class="page-heading">
@@ -150,7 +154,12 @@ const PostList = () => {
 													</a>
 													{!post.isActive && (
 														<>
-															<a href="#disabled">
+															<a
+																href="#disabled"
+																onClick={() => {
+																	handleEdit(post.id);
+																}}
+															>
 																<i className="icon-mid bi bi-pencil-square me-2"></i>
 															</a>
 															<a href="#disabled" className="danger">

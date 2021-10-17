@@ -41,7 +41,7 @@ const CategoryCreate = ({ onSubmit, onCancel, data }) => {
 					Cancel
 				</button>
 				<button type="submit" className="btn btn-primary">
-					Create
+					Save
 				</button>
 			</div>
 		</form>

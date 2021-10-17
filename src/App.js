@@ -7,6 +7,7 @@ import {
 	CategoryCreate,
 	CategoryEdit,
 	PostCreate,
+	PostEdit,
 } from "./pages";
 import { useEffect, useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
@@ -56,6 +57,9 @@ function App() {
 					</Route>
 					<Route path="/post/create">
 						<PostCreate />
+					</Route>
+					<Route path="/post/:id">
+						<PostEdit />
 					</Route>
 					<Route path="/post">
 						<PostList />
