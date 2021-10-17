@@ -125,28 +125,28 @@ const PostList = () => {
 
 	return (
 		<>
-			<div class="page-heading">
-				<div class="page-title">
-					<div class="row">
-						<div class="col-12 col-md-6 order-md-1 order-last">
+			<div className="page-heading">
+				<div className="page-title">
+					<div className="row">
+						<div className="col-12 col-md-6 order-md-1 order-last">
 							<h3>Category Table</h3>
-							<p class="text-subtitle text-muted">Show your data here</p>
+							<p className="text-subtitle text-muted">Show your data here</p>
 						</div>
 					</div>
 				</div>
-				<section class="section">
-					<div class="card">
-						<div class="card-header"></div>
-						<div class="card-body">
+				<section className="section">
+					<div className="card">
+						<div className="card-header"></div>
+						<div className="card-body">
 							<button
 								type="button"
-								class="btn btn-primary mb-3"
+								className="btn btn-primary mb-3"
 								onClick={handleCreate}
 							>
 								<i className="bi bi-plus-circle-fill"></i>
 								<span> Create</span>
 							</button>
-							<table class="table table-striped" id="table1">
+							<table className="table table-striped" id="table1">
 								<thead>
 									<tr>
 										<th className="text-center">No</th>

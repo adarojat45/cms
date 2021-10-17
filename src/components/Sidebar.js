@@ -34,7 +34,7 @@ const Sidebar = ({ isActive, onClick }) => {
 						<li className="sidebar-item active ">
 							<button
 								type="button"
-								class="btn btn-primary sidebar-link btn-block"
+								className="btn btn-primary sidebar-link btn-block"
 								onClick={() => handleChangePage("/")}
 							>
 								<i className="bi bi-grid-fill"></i>
@@ -44,7 +44,7 @@ const Sidebar = ({ isActive, onClick }) => {
 						<li className="sidebar-item active ">
 							<button
 								type="button"
-								class="btn btn-primary sidebar-link btn-block"
+								className="btn btn-primary sidebar-link btn-block"
 								onClick={() => handleChangePage("/category")}
 							>
 								<i className="bi bi-grid-fill"></i>
@@ -54,7 +54,7 @@ const Sidebar = ({ isActive, onClick }) => {
 						<li className="sidebar-item active ">
 							<button
 								type="button"
-								class="btn btn-primary sidebar-link btn-block"
+								className="btn btn-primary sidebar-link btn-block"
 								onClick={() => handleChangePage("/post")}
 							>
 								<i className="bi bi-grid-fill"></i>

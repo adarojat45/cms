@@ -89,19 +89,19 @@ const PostCreate = () => {
 
 	return (
 		<>
-			<div class="page-heading">
-				<div class="page-title">
-					<div class="row">
-						<div class="col-12 col-md-6 order-md-1 order-last">
+			<div className="page-heading">
+				<div className="page-title">
+					<div className="row">
+						<div className="col-12 col-md-6 order-md-1 order-last">
 							<h3>PostCreate</h3>
-							<p class="text-subtitle text-muted">Show your data here</p>
+							<p className="text-subtitle text-muted">Show your data here</p>
 						</div>
 					</div>
 				</div>
-				<section class="section">
-					<div class="card">
-						<div class="card-header">PostCreate</div>
-						<div class="card-body">
+				<section className="section">
+					<div className="card">
+						<div className="card-header">PostCreate</div>
+						<div className="card-body">
 							<PostForm
 								categories={categories}
 								post={post}
