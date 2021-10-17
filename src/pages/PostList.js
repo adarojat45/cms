@@ -71,6 +71,29 @@ const PostList = () => {
 	const handleEdit = (id) => {
 		history.push("/post/" + id);
 	};
+	const handleDelete = async (id) => {
+		try {
+			await toast.promise(
+				myServer({
+					url: "/posts/" + id,
+					method: "DELETE",
+					headers: {
+						token: localStorage.getItem("token"),
+					},
+				}),
+				{
+					pending: toastHelper("Loading...", "info"),
+					success: toastHelper("Successfully deleted", "success"),
+					error: toastHelper(null, "error"),
+				}
+			);
+			const newPosts = posts.filter((el) => el.id !== id);
+			setPosts(newPosts);
+		} catch (error) {
+			toast.error(error?.response?.data);
+		}
+	};
+
 	return (
 		<>
 			<div class="page-heading">
@@ -170,7 +193,13 @@ const PostList = () => {
 															>
 																<i className="icon-mid bi bi-pencil-square me-2"></i>
 															</a>
-															<a href="#disabled" className="danger">
+															<a
+																href="#disabled"
+																className="danger"
+																onClick={() => {
+																	handleDelete(post.id);
+																}}
+															>
 																<i className="icon-mid bi bi-trash me-2 text-danger"></i>
 															</a>
 														</>
