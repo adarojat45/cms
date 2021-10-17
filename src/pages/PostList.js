@@ -4,6 +4,15 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import toastHelper from "../helpers/toastHelper";
 import { useHistory } from "react-router";
+import Swal from "sweetalert2";
+
+const swalWithBootstrapButtons = Swal.mixin({
+	customClass: {
+		confirmButton: "btn btn-primary mx-2",
+		cancelButton: "btn btn-danger",
+	},
+	buttonsStyling: false,
+});
 
 const PostList = () => {
 	const history = useHistory();
@@ -71,6 +80,25 @@ const PostList = () => {
 	const handleEdit = (id) => {
 		history.push("/post/" + id);
 	};
+
+	const deleteConfirm = (id) => {
+		swalWithBootstrapButtons
+			.fire({
+				title: "Are you sure?",
+				text: "You won't be able to revert this!",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel!",
+				reverseButtons: true,
+			})
+			.then((result) => {
+				if (result.isConfirmed) {
+					handleDelete(id);
+				}
+			});
+	};
+
 	const handleDelete = async (id) => {
 		try {
 			await toast.promise(
@@ -197,7 +225,7 @@ const PostList = () => {
 																href="#disabled"
 																className="danger"
 																onClick={() => {
-																	handleDelete(post.id);
+																	deleteConfirm(post.id);
 																}}
 															>
 																<i className="icon-mid bi bi-trash me-2 text-danger"></i>
