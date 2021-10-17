@@ -5,6 +5,7 @@ import {
 	Dashboard,
 	CategoryList,
 	CategoryCreate,
+	CategoryEdit,
 } from "./pages";
 import { useEffect, useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
@@ -56,6 +57,9 @@ function App() {
 					</Route>
 					<Route path="/category/create">
 						<CategoryCreate />
+					</Route>
+					<Route path="/category/:id">
+						<CategoryEdit />
 					</Route>
 					<Route path="/category">
 						<CategoryList />

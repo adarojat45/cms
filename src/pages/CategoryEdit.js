@@ -1,12 +1,42 @@
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import toastHelper from "../helpers/toastHelper";
 import { myServer } from "../apis";
 import { CategoryForm } from "../components";
+import { useEffect, useState } from "react";
 
-const CategoryCreate = () => {
+const CategoryEdit = () => {
 	const history = useHistory();
+	const { id } = useParams();
+	const [post, setPost] = useState(null);
+
+	useEffect(() => {
+		fetchPost();
+		// eslint-disable-next-line
+	}, [id]);
+
+	const fetchPost = async () => {
+		try {
+			const { data } = await toast.promise(
+				myServer({
+					url: "/categories/" + id,
+					method: "GET",
+					headers: {
+						token: localStorage.getItem("token"),
+					},
+				}),
+				{
+					pending: toastHelper("Loading...", "info"),
+					success: toastHelper("Successfully fetched", "success"),
+					error: toastHelper(null, "error"),
+				}
+			);
+			setPost(data);
+		} catch (error) {
+			toast.error(error?.response?.data);
+		}
+	};
 
 	const handleCancel = () => {
 		history.push("/category");
@@ -16,8 +46,8 @@ const CategoryCreate = () => {
 		try {
 			await toast.promise(
 				myServer({
-					url: "/categories",
-					method: "POST",
+					url: "/categories/" + post.id,
+					method: "PUT",
 					headers: {
 						token: localStorage.getItem("token"),
 					},
@@ -49,7 +79,11 @@ const CategoryCreate = () => {
 					<div className="card">
 						<div className="card-header">Category Create</div>
 						<div className="card-body">
-							<CategoryForm onCancel={handleCancel} onSubmit={handleSubmit} />
+							<CategoryForm
+								data={post}
+								onCancel={handleCancel}
+								onSubmit={handleSubmit}
+							/>
 						</div>
 					</div>
 				</section>
@@ -59,4 +93,4 @@ const CategoryCreate = () => {
 	);
 };
 
-export default CategoryCreate;
+export default CategoryEdit;

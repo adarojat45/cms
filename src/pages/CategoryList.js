@@ -92,6 +92,10 @@ const PostList = () => {
 		}
 	};
 
+	const handleEdit = (id) => {
+		history.push("/category/" + id);
+	};
+
 	return (
 		<>
 			<div class="page-heading">
@@ -153,7 +157,6 @@ const PostList = () => {
 																href="#disabled"
 																onClick={() => {
 																	handleStatusChange(category.id, true);
-																	return false;
 																}}
 															>
 																Active
@@ -165,7 +168,6 @@ const PostList = () => {
 																href="#disabled"
 																onClick={() => {
 																	handleStatusChange(category.id, false);
-																	return false;
 																}}
 															>
 																Inactive
@@ -179,7 +181,12 @@ const PostList = () => {
 													</a>
 													{!category.isActive && (
 														<>
-															<a href="#disabled">
+															<a
+																href="#disabled"
+																onClick={() => {
+																	handleEdit(category.id);
+																}}
+															>
 																<i className="icon-mid bi bi-pencil-square me-2"></i>
 															</a>
 															<a
@@ -187,7 +194,6 @@ const PostList = () => {
 																className="danger"
 																onClick={() => {
 																	handleDelete(category.id);
-																	return false;
 																}}
 															>
 																<i className="icon-mid bi bi-trash me-2 text-danger"></i>
