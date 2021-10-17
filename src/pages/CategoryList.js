@@ -69,6 +69,29 @@ const PostList = () => {
 		history.push("/category/create");
 	};
 
+	const handleDelete = async (id) => {
+		try {
+			await toast.promise(
+				myServer({
+					url: "/categories/" + id,
+					method: "DELETE",
+					headers: {
+						token: localStorage.getItem("token"),
+					},
+				}),
+				{
+					pending: toastHelper("Loading...", "info"),
+					success: toastHelper("Successfully deleted", "success"),
+					error: toastHelper(null, "error"),
+				}
+			);
+			const newCategories = categories.filter((el) => el.id !== id);
+			setCategories(newCategories);
+		} catch (error) {
+			toast.error(error.response.data);
+		}
+	};
+
 	return (
 		<>
 			<div class="page-heading">
@@ -128,7 +151,10 @@ const PostList = () => {
 															<a
 																className="dropdown-item"
 																href="#disabled"
-																onClick={() => handleStatusChange(category.id, true)}
+																onClick={() => {
+																	handleStatusChange(category.id, true);
+																	return false;
+																}}
 															>
 																Active
 															</a>
@@ -137,7 +163,10 @@ const PostList = () => {
 															<a
 																className="dropdown-item"
 																href="#disabled"
-																onClick={() => handleStatusChange(category.id, false)}
+																onClick={() => {
+																	handleStatusChange(category.id, false);
+																	return false;
+																}}
 															>
 																Inactive
 															</a>
@@ -153,7 +182,14 @@ const PostList = () => {
 															<a href="#disabled">
 																<i className="icon-mid bi bi-pencil-square me-2"></i>
 															</a>
-															<a href="#disabled" className="danger">
+															<a
+																href="#disabled"
+																className="danger"
+																onClick={() => {
+																	handleDelete(category.id);
+																	return false;
+																}}
+															>
 																<i className="icon-mid bi bi-trash me-2 text-danger"></i>
 															</a>
 														</>

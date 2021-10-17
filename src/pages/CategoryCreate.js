@@ -31,6 +31,7 @@ const CategoryCreate = () => {
 					error: toastHelper(null, "error"),
 				}
 			);
+			setName("");
 		} catch (error) {
 			toast.error(error.response.data);
 		}
