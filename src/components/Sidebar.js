@@ -32,34 +32,34 @@ const Sidebar = ({ isActive, onClick }) => {
 					<ul className="menu">
 						<li className="sidebar-title">Menu</li>
 						<li className="sidebar-item active ">
-							<a
-								href="#disabled"
+							<button
+								type="button"
+								class="btn btn-primary sidebar-link btn-block"
 								onClick={() => handleChangePage("/")}
-								className="sidebar-link"
 							>
 								<i className="bi bi-grid-fill"></i>
 								<span>Dashboard</span>
-							</a>
+							</button>
 						</li>
 						<li className="sidebar-item active ">
-							<a
-								href="#disabled"
+							<button
+								type="button"
+								class="btn btn-primary sidebar-link btn-block"
 								onClick={() => handleChangePage("/category")}
-								className="sidebar-link"
 							>
 								<i className="bi bi-grid-fill"></i>
 								<span>Category</span>
-							</a>
+							</button>
 						</li>
 						<li className="sidebar-item active ">
-							<a
-								href="#disabled"
+							<button
+								type="button"
+								class="btn btn-primary sidebar-link btn-block"
 								onClick={() => handleChangePage("/post")}
-								className="sidebar-link"
 							>
 								<i className="bi bi-grid-fill"></i>
 								<span>Post</span>
-							</a>
+							</button>
 						</li>
 					</ul>
 				</div>
