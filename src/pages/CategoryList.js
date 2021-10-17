@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { myServer } from "../apis";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import toastHelper from "../helpers/toastHelper";
 
 const PostList = () => {
 	useEffect(() => {
@@ -10,41 +13,52 @@ const PostList = () => {
 
 	const fetchCategories = async () => {
 		try {
-			const { data } = await myServer({
-				url: "/categories",
-				method: "GET",
-				headers: {
-					token: localStorage.getItem("token"),
-				},
-			});
+			const { data } = await toast.promise(
+				myServer({
+					url: "/categories",
+					method: "GET",
+					headers: {
+						token: localStorage.getItem("token"),
+					},
+				}),
+				{
+					pending: toastHelper("Loading...", "info"),
+					success: toastHelper("Successfully fetched", "success"),
+					error: toastHelper(null, "error"),
+				}
+			);
 			setCategories(data);
 		} catch (error) {
-			console.log("🚀 ~ file: PostList.js ~ line 11 ~ fetchPost ~ error", error);
+			toast.error(error.response.data);
 		}
 	};
 
 	const handleStatusChange = async (id, status) => {
 		try {
-			const { data } = await myServer({
-				url: "/categories/" + id + "/updateStatus",
-				method: "PATCH",
-				headers: {
-					token: localStorage.getItem("token"),
-				},
-				data: {
-					isActive: status,
-				},
-			});
+			const { data } = await toast.promise(
+				myServer({
+					url: "/categories/" + id + "/updateStatus",
+					method: "PATCH",
+					headers: {
+						token: localStorage.getItem("token"),
+					},
+					data: {
+						isActive: status,
+					},
+				}),
+				{
+					pending: toastHelper("Loading...", "info"),
+					success: toastHelper("Successfully updated", "success"),
+					error: toastHelper(null, "error"),
+				}
+			);
 
 			const index = categories.findIndex((el) => el.id === id);
 			const newPosts = [...categories];
 			newPosts[index] = data;
 			setCategories(newPosts);
 		} catch (error) {
-			console.log(
-				"🚀 ~ file: PostList.js ~ line 38 ~ handleStatusChange ~ error",
-				error
-			);
+			toast.error(error.response.data);
 		}
 	};
 	return (
@@ -137,6 +151,7 @@ const PostList = () => {
 						</div>
 					</div>
 				</section>
+				<ToastContainer />
 			</div>
 		</>
 	);
