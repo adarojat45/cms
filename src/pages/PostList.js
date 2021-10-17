@@ -99,6 +99,7 @@ const PostList = () => {
 									<tr>
 										<th className="text-center">No</th>
 										<th className="text-center">Title</th>
+										<th className="text-center">Category</th>
 										<th className="text-center">View</th>
 										<th className="text-center">Status</th>
 										<th className="text-center">Action</th>
@@ -110,6 +111,13 @@ const PostList = () => {
 											<tr>
 												<td className="text-center">{index + 1}</td>
 												<td>{post.name}</td>
+												<td className="text-center">
+													{post.categories.map((el) => (
+														<span class="badge bg-primary me-1" key={el.id}>
+															{el.name}
+														</span>
+													))}
+												</td>
 												<td className="text-center">{post.view || 0}</td>
 												<td className="text-center">
 													<button

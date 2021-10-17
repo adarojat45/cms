@@ -14,6 +14,7 @@ const PostCreate = () => {
 	useEffect(() => {
 		fetchCategories();
 		fetchPost();
+		// eslint-disable-next-line
 	}, [id]);
 
 	const fetchCategories = async () => {

@@ -7,9 +7,10 @@ const PostForm = ({ onSubmit, onCancel, post, categories }) => {
 	const [postInput, setPostInput] = useState({
 		name: "",
 		excerpt: "",
-		description: "",
 		isMarkdown: true,
 	});
+
+	const [description, setDescription] = useState("");
 
 	const [categoryOptions, setCategoryOptions] = useState([]);
 	const [tagsOptions] = useState([
@@ -27,9 +28,9 @@ const PostForm = ({ onSubmit, onCancel, post, categories }) => {
 			// set input
 			setPostInput({
 				name: post.name,
-				description: post.description,
 				isMarkdown: post.isMarkdown,
 			});
+			setDescription(post.description);
 			// setTags
 			const newTags = post.tags.map((tag) => {
 				return {
@@ -67,7 +68,7 @@ const PostForm = ({ onSubmit, onCancel, post, categories }) => {
 	};
 
 	const onDescriptionChange = (value) => {
-		setPostInput({ ...postInput, description: value });
+		setDescription(value);
 	};
 
 	const handleCancel = () => {
@@ -79,7 +80,10 @@ const PostForm = ({ onSubmit, onCancel, post, categories }) => {
 		if (onSubmit) {
 			const payload = {
 				...postInput,
-				categories: selectedCategories,
+				description,
+				categories: selectedCategories.map((cat) => {
+					return { id: cat.value, name: cat.label };
+				}),
 				tags: selectedTags.map((tag) => tag.label),
 			};
 			onSubmit(payload);
@@ -118,11 +122,7 @@ const PostForm = ({ onSubmit, onCancel, post, categories }) => {
 				<label for="Description" class="form-label">
 					Description
 				</label>
-				<MDEditor
-					value={postInput.description}
-					onChange={onDescriptionChange}
-					height={500}
-				/>
+				<MDEditor value={description} onChange={onDescriptionChange} height={500} />
 			</div>
 			<div class="mb-3 row">
 				<div class="col-6">
