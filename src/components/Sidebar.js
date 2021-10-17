@@ -1,4 +1,12 @@
+import { useHistory } from "react-router-dom";
+
 const Sidebar = ({ isActive, onClick }) => {
+	const history = useHistory();
+
+	const handleChangePage = (newPage) => {
+		history.push(newPage);
+	};
+
 	return (
 		<div id="sidebar" className={isActive ? "active" : "inactive"}>
 			<div className="sidebar-wrapper active">
@@ -23,11 +31,34 @@ const Sidebar = ({ isActive, onClick }) => {
 				<div className="sidebar-menu">
 					<ul className="menu">
 						<li className="sidebar-title">Menu</li>
-
 						<li className="sidebar-item active ">
-							<a href="table.html" className="sidebar-link">
+							<a
+								href="#disabled"
+								onClick={() => handleChangePage("/")}
+								className="sidebar-link"
+							>
 								<i className="bi bi-grid-fill"></i>
-								<span>Entity 1</span>
+								<span>Dashboard</span>
+							</a>
+						</li>
+						<li className="sidebar-item active ">
+							<a
+								href="#disabled"
+								onClick={() => handleChangePage("/category")}
+								className="sidebar-link"
+							>
+								<i className="bi bi-grid-fill"></i>
+								<span>Category</span>
+							</a>
+						</li>
+						<li className="sidebar-item active ">
+							<a
+								href="#disabled"
+								onClick={() => handleChangePage("/post")}
+								className="sidebar-link"
+							>
+								<i className="bi bi-grid-fill"></i>
+								<span>Post</span>
 							</a>
 						</li>
 					</ul>

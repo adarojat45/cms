@@ -1,5 +1,5 @@
 import { Sidebar, Header } from "./components";
-import { PostList, Login } from "./pages";
+import { PostList, Login, Dashboard, CategoryList } from "./pages";
 import { useEffect, useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 
@@ -42,8 +42,14 @@ function App() {
 					<Route path="/login">
 						<Login onLogin={handleLogin} />
 					</Route>
-					<Route path="/">
+					<Route exact path="/">
+						<Dashboard />
+					</Route>
+					<Route path="/post">
 						<PostList />
+					</Route>
+					<Route path="/category">
+						<CategoryList />
 					</Route>
 				</Switch>
 			</div>
