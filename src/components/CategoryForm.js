@@ -21,7 +21,7 @@ const CategoryCreate = ({ onSubmit, onCancel, data }) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<div className="mb-3">
-				<label for="exampleFormControlInput1" className="form-label">
+				<label htmlFor="exampleFormControlInput1" className="form-label">
 					Name
 				</label>
 				<input

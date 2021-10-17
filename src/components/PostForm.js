@@ -93,7 +93,7 @@ const PostForm = ({ onSubmit, onCancel, post, categories }) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<div className="mb-3">
-				<label for="exampleFormControlInput1" className="form-label">
+				<label htmlFor="exampleFormControlInput1" className="form-label">
 					Title
 				</label>
 				<input
@@ -106,7 +106,7 @@ const PostForm = ({ onSubmit, onCancel, post, categories }) => {
 				/>
 			</div>
 			<div className="mb-3">
-				<label for="Excerpt" className="form-label">
+				<label htmlFor="Excerpt" className="form-label">
 					Excerpt
 				</label>
 				<textarea
@@ -119,14 +119,14 @@ const PostForm = ({ onSubmit, onCancel, post, categories }) => {
 				/>
 			</div>
 			<div className="mb-3">
-				<label for="Description" className="form-label">
+				<label htmlFor="Description" className="form-label">
 					Description
 				</label>
 				<MDEditor value={description} onChange={onDescriptionChange} height={500} />
 			</div>
 			<div className="mb-3 row">
 				<div className="col-6">
-					<label for="Category" className="form-label">
+					<label htmlFor="Category" className="form-label">
 						Category
 					</label>
 					<Select
@@ -137,7 +137,7 @@ const PostForm = ({ onSubmit, onCancel, post, categories }) => {
 					/>
 				</div>
 				<div className="col-6">
-					<label for="Tags" className="form-label">
+					<label htmlFor="Tags" className="form-label">
 						Tags
 					</label>
 					<CreatableSelect

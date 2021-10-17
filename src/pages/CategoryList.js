@@ -158,7 +158,7 @@ const PostList = () => {
 								<tbody>
 									{categories.map((category, index) => {
 										return (
-											<tr>
+											<tr key={category.id}>
 												<td className="text-center">{index + 1}</td>
 												<td>{category.name}</td>
 												<td className="text-center">
