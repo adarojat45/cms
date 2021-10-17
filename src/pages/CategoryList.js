@@ -32,7 +32,7 @@ const PostList = () => {
 			);
 			setCategories(data);
 		} catch (error) {
-			toast.error(error.response.data);
+			toast.error(error?.response?.data);
 		}
 	};
 
@@ -61,7 +61,7 @@ const PostList = () => {
 			newPosts[index] = data;
 			setCategories(newPosts);
 		} catch (error) {
-			toast.error(error.response.data);
+			toast.error(error?.response?.data);
 		}
 	};
 
@@ -88,7 +88,7 @@ const PostList = () => {
 			const newCategories = categories.filter((el) => el.id !== id);
 			setCategories(newCategories);
 		} catch (error) {
-			toast.error(error.response.data);
+			toast.error(error?.response?.data);
 		}
 	};
 

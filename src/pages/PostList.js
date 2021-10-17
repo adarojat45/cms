@@ -29,7 +29,7 @@ const PostList = () => {
 			);
 			setPosts(data);
 		} catch (error) {
-			toast.error(error.response.data);
+			toast.error(error?.response?.data);
 		}
 	};
 
@@ -57,7 +57,7 @@ const PostList = () => {
 			newPosts[index] = data;
 			setPosts(newPosts);
 		} catch (error) {
-			toast.error(error.response.data);
+			toast.error(error?.response?.data);
 		}
 	};
 	return (
