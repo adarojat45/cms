@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { myServer } from "../apis";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import toastHelper from "../helpers/toastHelper";
 
 const PostList = () => {
 	useEffect(() => {
@@ -21,13 +22,9 @@ const PostList = () => {
 					},
 				}),
 				{
-					pending: "Loading...",
-					success: "Succesfully fetched",
-					error: {
-						render(data) {
-							return data.response.data;
-						},
-					},
+					pending: toastHelper("Loading...", "info"),
+					success: toastHelper("Successfully updated", "success"),
+					error: toastHelper(null, "error"),
 				}
 			);
 			setPosts(data);
@@ -50,13 +47,9 @@ const PostList = () => {
 					},
 				}),
 				{
-					pending: "Loading...",
-					success: "Succesfully updated",
-					error: {
-						render(data) {
-							return data.response.data;
-						},
-					},
+					pending: toastHelper("Loading...", "info"),
+					success: toastHelper("Successfully updated", "success"),
+					error: toastHelper(null, "error"),
 				}
 			);
 			const index = posts.findIndex((post) => post.id === id);
