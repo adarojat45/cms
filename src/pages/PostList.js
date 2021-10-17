@@ -3,8 +3,11 @@ import { myServer } from "../apis";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import toastHelper from "../helpers/toastHelper";
+import { useHistory } from "react-router";
 
 const PostList = () => {
+	const history = useHistory();
+
 	useEffect(() => {
 		fetchPost();
 	}, []);
@@ -60,6 +63,10 @@ const PostList = () => {
 			toast.error(error?.response?.data);
 		}
 	};
+
+	const handleCreate = () => {
+		history.push("/post/create");
+	};
 	return (
 		<>
 			<div class="page-heading">
@@ -75,6 +82,14 @@ const PostList = () => {
 					<div class="card">
 						<div class="card-header">Post List</div>
 						<div class="card-body">
+							<button
+								type="button"
+								class="btn btn-primary mb-3"
+								onClick={handleCreate}
+							>
+								<i className="bi bi-plus-circle-fill"></i>
+								<span> Create</span>
+							</button>
 							<table class="table table-striped" id="table1">
 								<thead>
 									<tr>

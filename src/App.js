@@ -6,9 +6,11 @@ import {
 	CategoryList,
 	CategoryCreate,
 	CategoryEdit,
+	PostCreate,
 } from "./pages";
 import { useEffect, useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
 	const [isSidebar, setIsSidebar] = useState(false);
@@ -51,6 +53,9 @@ function App() {
 					</Route>
 					<Route exact path="/">
 						<Dashboard />
+					</Route>
+					<Route path="/post/create">
+						<PostCreate />
 					</Route>
 					<Route path="/post">
 						<PostList />
