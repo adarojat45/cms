@@ -28,6 +28,7 @@ const PostForm = ({ onSubmit, onCancel, post, categories }) => {
 			// set input
 			setPostInput({
 				name: post.name,
+				excerpt: post.excerpt,
 				isMarkdown: post.isMarkdown,
 			});
 			setDescription(post.description);
