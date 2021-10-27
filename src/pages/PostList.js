@@ -169,7 +169,7 @@ const PostList = () => {
 														</span>
 													))}
 												</td>
-												<td className="text-center">{post.view || 0}</td>
+												<td className="text-center">{post.views || 0}</td>
 												<td className="text-center">
 													<button
 														className={
